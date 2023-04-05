@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+// This package would be the name of your microservice and it is important
+// for generating pb.go files, this helps proto compiler know where to output your files
+package ping;
+
+// where to store generated go code
+option go_package = "./pkg/pb";
+
+// declare service name - PingService
+// decalre methods - in this case only got 1, CreatePing. Actually can just be a Ping but 
+// following example from: https://levelup.gitconnected.com/microservices-with-go-grpc-api-gateway-and-authentication-part-1-2-393ad9fc9d30
+// normally you would do normal CRUD, so the name should be Create, Read, Update and Delete
+service PingService {
+  rpc CreatePing(CreatePingRequest) returns (CreatePingResponse) {}
+  rpc GetPing(GetPingRequest) returns (GetPingResponse) {}
+}
+
+// declare request message 
+message CreatePingRequest {
+  string message = 2;
+}
+
+// declare response message
+message CreatePingResponse { 
+  int64 status = 1;
+  string error = 2;
+  int64 id = 3;
+}
+
+message GetPingData {
+  int64 userId = 1;
+  string message = 2;
+}
+
+// Get Ping
+message GetPingRequest {
+  int64 userId = 1;
+}
+
+message GetPingResponse {
+  int64 status = 1;
+  string error = 2;
+  GetPingData data = 3;
+}
