@@ -1,0 +1,10 @@
+/config/envs
+/bin
+/vendor
+/pkg.pb/**.pb.go
+
+.DS_Store
+*.log 
+*.out
+*.test
+*.prof

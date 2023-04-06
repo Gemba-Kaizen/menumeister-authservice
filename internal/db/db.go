@@ -3,7 +3,7 @@ package db
 import (
 	"log"
 
-	"github.com/Gemba-Kaizen/example-microservice-gRPC/internal/models"
+	"github.com/Gemba-Kaizen/menumeister-authservice/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -20,7 +20,7 @@ func Init(url string) Handler {
   }
 
 	// Migrate db for every model you have
-	db.AutoMigrate(&models.Ping{})
+	db.AutoMigrate(&models.Merchant{})
 
 	return Handler{db}
 }
