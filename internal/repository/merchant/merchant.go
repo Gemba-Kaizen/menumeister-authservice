@@ -19,7 +19,7 @@ func (r *MerchantRepository) CreateMerchant(merchant *models.Merchant) error{
 func (r *MerchantRepository) GetMerchantByEmail(email string) (*models.Merchant, error) {
 	var merchant models.Merchant
 
-	if result := r.H.DB.Where(&models.Merchant{Email: merchant.Email}).First(&merchant); result.Error!= nil {
+	if result := r.H.DB.Where(&models.Merchant{Email: email}).First(&merchant); result.Error!= nil {
 		return nil, result.Error
 	}
 	return &merchant, nil

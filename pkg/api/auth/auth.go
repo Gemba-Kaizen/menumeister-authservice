@@ -12,17 +12,17 @@ type AuthHandler struct {
 	AuthService *services.AuthService
 }
 
-func (h *AuthHandler) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
+func (h *AuthHandler) RegisterMerchant(ctx context.Context, req *pb.RegisterMerchantRequest) (*pb.RegisterMerchantResponse, error) {
 	res, err := h.AuthService.RegisterMerchant(req.Email, req.Password)
 	return res, err
 }
 
-func (h *AuthHandler) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-	res, err := h.AuthService.Login(req.Email, req.Password)
+func (h *AuthHandler) LoginMerchant(ctx context.Context, req *pb.LoginMerchantRequest) (*pb.LoginMerchantResponse, error) {
+	res, err := h.AuthService.LoginMerchant(req.Email, req.Password)
 	return res, err
 }
 
-func (h *AuthHandler) ValidateSession(ctx context.Context, req *pb.ValidateMerchantRequest) (*pb.ValidateMerchantResponse, error) {
+func (h *AuthHandler) ValidateMercant(ctx context.Context, req *pb.ValidateMerchantRequest) (*pb.ValidateMerchantResponse, error) {
 	res, err := h.AuthService.ValdiateSession(req.Token)
 	return res, err
 }

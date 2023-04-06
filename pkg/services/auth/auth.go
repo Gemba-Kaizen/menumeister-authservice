@@ -15,7 +15,7 @@ type AuthService struct {
 }
 
 // Check email exists, create merchant if not exists
-func (s *AuthService) RegisterMerchant(email string, password string) (*pb.RegisterResponse, error) {
+func (s *AuthService) RegisterMerchant(email string, password string) (*pb.RegisterMerchantResponse, error) {
 	var merchant models.Merchant
 
 	merchant.Email = email
@@ -24,38 +24,38 @@ func (s *AuthService) RegisterMerchant(email string, password string) (*pb.Regis
 	err := s.MerchantRepo.CreateMerchant(&merchant)
 
 	if err != nil {
-		return &pb.RegisterResponse{
+		return &pb.RegisterMerchantResponse{
 			Status: http.StatusConflict,
 			Error: "e-mail already taken",
 		}, nil
 	}
 
-	return &pb.RegisterResponse{
+	return &pb.RegisterMerchantResponse{
 		Status: http.StatusCreated,
 	}, nil
 }
 
 // Check that email exists, check if password correct, generate token
-func (s *AuthService) Login(email string, password string) (*pb.LoginResponse, error) {
-  merchant, err := s.MerchantRepo.GetMerchantByEmail(email); if err!= nil {
-		return &pb.LoginResponse{
+func (s *AuthService) LoginMerchant(email string, password string) (*pb.LoginMerchantResponse, error) {
+	merchant, err := s.MerchantRepo.GetMerchantByEmail(email); if err!= nil {
+		return &pb.LoginMerchantResponse{
       Status: http.StatusNotFound,
-      Error: "merchant not found",
+      Error: "merchant does not exists",
     }, nil
 	}
 
 	match := services.CheckPassword(password, merchant.Password)
 
 	if !match {
-		return &pb.LoginResponse{
+		return &pb.LoginMerchantResponse{
       Status: http.StatusUnauthorized,
-      Error: "merchant not found",
+      Error: "wrong password",
     }, nil
 	}
 
 	token, _ := s.Jwt.GenerateToken(*merchant)
 
-	return &pb.LoginResponse{
+	return &pb.LoginMerchantResponse{
 		Status: http.StatusOK,
   	Token: token,
 	}, nil

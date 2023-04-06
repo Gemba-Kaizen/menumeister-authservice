@@ -38,7 +38,7 @@ func main() {
 		log.Fatalln("Failed at listen: ", err)
 	}
 
-	fmt.Println("Ping Svc on", c.Port)
+	fmt.Println("Auth Svc on", c.Port)
 
 	grpcService := grpc.NewServer()
 

@@ -5,29 +5,29 @@ package auth;
 option go_package = "./pkg/pb";
 
 service AuthService {
-  rpc Register(RegisterRequest) returns (RegisterResponse) {}
-  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc RegisterMerchant(RegisterMerchantRequest) returns (RegisterMerchantResponse) {}
+  rpc LoginMerchant(LoginMerchantRequest) returns (LoginMerchantResponse) {}
   rpc ValidateMerchant(ValidateMerchantRequest) returns (ValidateMerchantResponse) {}
 }
 
 // Register
-message RegisterRequest {
+message RegisterMerchantRequest {
   string email = 1;
   string password = 2;
 }
 
-message RegisterResponse {
+message RegisterMerchantResponse {
   int64 status = 1;
   string error = 2;
 }
 
 // Login
-message LoginRequest {
+message LoginMerchantRequest {
   string email = 1;
   string password = 2;
 }
 
-message LoginResponse {
+message LoginMerchantResponse {
   int64 status = 1;
   string error = 2;
   string token = 3;
