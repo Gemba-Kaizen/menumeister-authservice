@@ -7,3 +7,6 @@ server:
 db:
 	cd internal/db && \
 		docker-compose up -d
+
+docker:
+	docker build --tag authservice .

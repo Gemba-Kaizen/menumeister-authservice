@@ -19,3 +19,7 @@ Data access layer
 Business logic layer
 - handler
 API layer
+
+## Docker
+1. make docker
+2. docker run -p 50051:50051 authservice
