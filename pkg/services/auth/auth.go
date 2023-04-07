@@ -1,6 +1,7 @@
 package services
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/Gemba-Kaizen/menumeister-authservice/internal/models"
@@ -30,6 +31,8 @@ func (s *AuthService) RegisterMerchant(email string, password string) (*pb.Regis
 		}, nil
 	}
 
+	log.Print("INFO: Merchant successfully created: ", merchant.Email)
+
 	return &pb.RegisterMerchantResponse{
 		Status: http.StatusCreated,
 	}, nil
@@ -44,6 +47,7 @@ func (s *AuthService) LoginMerchant(email string, password string) (*pb.LoginMer
     }, nil
 	}
 
+	log.Print("INFO: Merchant login request: ", merchant.Email);
 	match := services.CheckPassword(password, merchant.Password)
 
 	if !match {
@@ -79,6 +83,8 @@ func (s *AuthService) ValdiateSession(token string) (*pb.ValidateMerchantRespons
       Error: "merchant not found",
     }, nil
 	}
+
+	log.Print("INFO: Successful merchant login: ", merchant.Email);
 
 	return &pb.ValidateMerchantResponse{
 		Status: http.StatusOK,
